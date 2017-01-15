@@ -3,9 +3,11 @@
 
 SCRIPT_LOCATION=$0
 SCRIPT_DIR=`pwd "$SCRIPT_LOCATION"`
-CONTAINER_NAME="chatasp_couchbase"
+PROJECT_PATH=`dirname $SCRIPT_DIR`
+PROJECT_NAME=`basename $PROJECT_PATH`
+CONTAINER_NAME="$PROJECT_NAME"_couchbase
 CONTAINER_ID=`docker ps -a -f=name=$CONTAINER_NAME -q`
-LOCAL_DATA=$SCRIPT_DIR/couchbase
+LOCAL_DATA=$HOME/.couchbase/docker/$PROJECT_NAME
 
 usage() {
     cat <<EOM
@@ -16,7 +18,7 @@ USAGE:
     $(basename $0) [ACTION]
 
 ACTIONS:
-    install     - Create the container '$CONTAINER_NAME' from couchbase image.
+    install     - Create the container '$CONTAINER_NAME' with shared data in '$LOCAL_DATA'.
     uninstall   - Remove the couchbase container '$CONTAINER_NAME'.
     start       - Start the container '$CONTAINER_NAME'.
     stop        - Stop the container '$CONTAINER_NAME'.
@@ -32,7 +34,7 @@ if [ -x $1 ]; then
 fi
 
 if [ $1 = 'install' ]; then
-    mkdir "$LOCAL_DATA"
+    mkdir -p "$LOCAL_DATA"
 	docker run --net=host --name $CONTAINER_NAME -d -v "$LOCAL_DATA":/opt/couchbase/var couchbase/server:community
     #docker run --net=host --name $CONTAINER_NAME -d -v "$LOCAL_DATA":/opt/couchbase/var -p 8091-8093:8091-8093 -p 11210:11210 couchbase/server
 elif [ $1 = 'uninstall' ]; then
