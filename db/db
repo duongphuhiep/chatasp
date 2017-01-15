@@ -1,0 +1,53 @@
+#!/bin/sh
+##!/usr/bin/env bash
+
+SCRIPT_LOCATION=$0
+SCRIPT_DIR=`pwd "$SCRIPT_LOCATION"`
+CONTAINER_NAME="chatasp_couchbase"
+CONTAINER_ID=`docker ps -a -f=name=$CONTAINER_NAME -q`
+LOCAL_DATA=$SCRIPT_DIR/couchbase
+
+usage() {
+    cat <<EOM
+
+Helper to manage the database in developement
+
+USAGE:
+    $(basename $0) [ACTION]
+
+ACTIONS:
+    install     - Create the container '$CONTAINER_NAME' from couchbase image.
+    uninstall   - Remove the couchbase container '$CONTAINER_NAME'.
+    start       - Start the container '$CONTAINER_NAME'.
+    stop        - Stop the container '$CONTAINER_NAME'.
+    cbq         - Execute 'cbq' on the container '$CONTAINER_NAME'.
+EOM
+    exit 0
+}
+
+if [ -x $1 ]; then
+	echo "\nERROR: Missing [ACTION] argument!"
+	{ usage; }
+	exit 
+fi
+
+if [ $1 = 'install' ]; then
+    mkdir "$LOCAL_DATA"
+	docker run --net=host --name $CONTAINER_NAME -d -v "$LOCAL_DATA":/opt/couchbase/var couchbase/server:community
+    #docker run --net=host --name $CONTAINER_NAME -d -v "$LOCAL_DATA":/opt/couchbase/var -p 8091-8093:8091-8093 -p 11210:11210 couchbase/server
+elif [ $1 = 'uninstall' ]; then
+	if [ -d "$LOCAL_DATA" ]; then 
+		rm -rf "$LOCAL_DATA"
+	fi
+	if [ -n $CONTAINER_ID ]; then
+		docker stop $CONTAINER_ID
+		docker rm $CONTAINER_ID
+	fi
+elif [ $1 = 'start' ] || [ $1 = 'stop' ]; then
+	docker $1 $CONTAINER_NAME
+elif [ $1 = 'cbq' ]; then
+    docker exec -it $CONTAINER_NAME cbq
+else
+    echo "\nERROR: Unknow [ACTION] '$1'!"
+    { usage; }
+fi
