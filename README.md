@@ -35,3 +35,6 @@ Attach Debugger to the process `dotnet exec ... webapp.dll` in the list.
 > Tip: in the process list, filter the name of the application dll (`webapp.dll` in this case).
 
 You can also Run/Debug the WebApp directly from VSCode (F5)
+
+# Refernece
+* https://github.com/duongphuhiep/aspcore-boilerplate-01
