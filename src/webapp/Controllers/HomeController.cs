@@ -9,11 +9,19 @@ namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index(string name)
+        public ViewResult Index()
         {
-            return "Hello World";
+            return View();
         }
 
+        public string About()
+        {
+            return "About";
+        }
+        public string Contact()
+        {
+            return "Contact";
+        }
         public IActionResult Error()
         {
             return View();

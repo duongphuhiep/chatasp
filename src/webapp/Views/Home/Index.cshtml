@@ -1,0 +1,90 @@
+@model LoginRegisterViewModel
+@{ 
+    ViewData["Title"] = "Home"; 
+} 
+@section GlobalInlineCss {
+<style>
+    section { 
+        padding: 50px 0px; 
+    } 
+    section.signin {
+        background: #263238; 
+        color:white;
+    }
+</style>
+}
+
+<section class="signin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>CHATASP</h1>
+                <h2>A crowd free chatting forum</h2>
+            </div>
+            <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email</label>
+                        <input asp-for="Email" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Fantastic features!</h1>
+                <ul>
+                    <li>
+                        <h2>Freedom</h2>
+                    </li>
+                    <li>
+                        <h2>Anonymous</h2>
+                    </li>
+                    <li>
+                        <h2>Security</h2>
+                    </li>
+                    <li>
+                        <h2>Crowding</h2>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <form method="POST" asp-controller="Account" asp-action="Store">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">Email</label>
+                        <input asp-for="Email" type="text" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label">First name</label>
+                        <input asp-for="FirstName" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label">Last name</label>
+                        <input asp-for="LastName" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NickName" class="control-label">Nick name</label>
+                        <input asp-for="NickName" type="text" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

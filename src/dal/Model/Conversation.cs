@@ -8,5 +8,6 @@ namespace Dal.Model {
         public string Subject { get; set; }
         public List<User> Members { get; set; }
         public bool IsArchive { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }
