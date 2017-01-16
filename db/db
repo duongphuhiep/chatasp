@@ -1,10 +1,10 @@
 #!/bin/sh
 ##!/usr/bin/env bash
 
-SCRIPT_LOCATION=$0
-SCRIPT_DIR=`pwd "$SCRIPT_LOCATION"`
-PROJECT_PATH=`dirname $SCRIPT_DIR`
-PROJECT_NAME=`basename $PROJECT_PATH`
+SCRIPT=`readlink -f "$0"`
+SCRIPT_DIR=`dirname "$SCRIPT"`
+PROJECT_DIR=`dirname "$SCRIPT_DIR"`
+PROJECT_NAME=`basename $PROJECT_DIR`
 CONTAINER_NAME="$PROJECT_NAME"_couchbase
 CONTAINER_ID=`docker ps -a -f=name=$CONTAINER_NAME -q`
 LOCAL_DATA=$HOME/.couchbase/docker/$PROJECT_NAME
