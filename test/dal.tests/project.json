@@ -7,6 +7,13 @@
         "System.Runtime.Serialization.Primitives": "4.3.0",
         "xunit": "2.1.0",
         "dotnet-test-xunit": "1.0.0-rc2-192208-24",
+        "CouchbaseNetClient": "2.4.0-*",
+        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+        "Microsoft.Extensions.Configuration.Json": "1.0.0",
+        "Microsoft.Extensions.Logging": "1.0.0",
+        "Microsoft.Extensions.Logging.Console": "1.0.0",
+        "Microsoft.Extensions.Logging.Debug": "1.0.0",
+        "NLog.Extensions.Logging": "1.0.0-*",
         "dal": { "target": "project" }
     },
     "testRunner": "xunit",
