@@ -6,6 +6,7 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Logging;
+using Dal.Model;
 
 namespace Dal.Tests
 {
@@ -17,20 +18,29 @@ namespace Dal.Tests
             log = fixture.Logger;
         }
 
-        //private static readonly Cluster cluster = new Cluster("127.0.0.1");
-        [Fact]
+        //[Fact]
         public void StoreTest()
         {
-            log.LogInformation("Store test is running", "get ready");
+            using (Cluster cluster = new Cluster()) 
+            {
+                var msg = Message.New();
+                msg.Content = "Hello World";
 
-            // var builder = new ConfigurationBuilder()
-            //     .SetBasePath(Directory.GetCurrentDirectory())
-            //     .AddJsonFile("appsettings.json");
-            // var clientConfiguration = new ClientConfiguration();
-            // clientConfiguration.Servers = new List<Uri>() { new Uri("http://localhost:8091/pools") };
-            // clientConfiguration.UseSsl = false;
-            // Cluster cluster = new Cluster(clientConfiguration);
-            //db.Email="duongphuhiep@gmail.com";
+                try 
+                {
+                    using (var bucket = cluster.OpenBucket("chatasp")) 
+                    {
+                        var r = bucket.Insert<Message>(msg.Id.ToString(), msg);
+                        if (r.Success) 
+                        {
+                            log.LogInformation("Insert Success!!!");
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    log.LogError(ex.ToString());
+                }
+            }
         }
     }
 }

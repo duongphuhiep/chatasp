@@ -12,5 +12,13 @@ namespace Dal.Model {
         /// Time that server received the Message
         /// </summary>
         public DateTime PostAt { get; set; }
+
+        public static Message New() 
+        {
+            return new Message {
+                Id = Guid.NewGuid(),
+                SentAt = DateTime.UtcNow
+            };
+        }
     }
 }
