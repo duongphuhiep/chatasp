@@ -3,15 +3,15 @@
     ViewData["Title"] = "Home"; 
 } 
 @section GlobalInlineCss {
-<style>
-    section { 
-        padding: 50px 0px; 
-    } 
-    section.signin {
-        background: #263238; 
-        color:white;
-    }
-</style>
+    <style>
+        section { 
+            padding: 50px 0px; 
+        } 
+        section.signin {
+            background: #263238; 
+            color:white;
+        }
+    </style>
 }
 
 <section class="signin">
@@ -22,17 +22,7 @@
                 <h2>A crowd free chatting forum</h2>
             </div>
             <div class="col-md-6">
-                <form>
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label">Email</label>
-                        <input asp-for="Email" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label">Password</label>
-                        <input asp-for="Password" type="password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
-                </form>
+                @await Component.InvokeAsync(nameof(Login))
             </div>
         </div>
     </div>

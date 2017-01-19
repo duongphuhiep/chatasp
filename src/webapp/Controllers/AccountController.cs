@@ -15,7 +15,7 @@ namespace WebApplication.Controllers
         public IActionResult Store(LoginRegisterViewModel user)
         {
             log.LogInformation("Registered", user);
-            return Ok("Thank you");
+            return View("Login");
         }
 
         public string About()
