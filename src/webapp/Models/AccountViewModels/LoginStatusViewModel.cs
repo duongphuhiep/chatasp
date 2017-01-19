@@ -4,6 +4,7 @@ namespace Webapplication.Models.AccountViewModels
 {
     public class LoginStatusViewModel : LoginViewModel
     {
-        public bool IsSignin { get; set; }
+        public string Password { get; set; }
+        public bool IsSignedIn { get; set; }
     }
 }

@@ -12,10 +12,10 @@ namespace WebApplication.Controllers
             log = logger;
         }
 
-        public IActionResult Store(LoginRegisterViewModel user)
+        public IActionResult RegisterUser(RegisterUserViewModel user)
         {
             log.LogInformation("Registered", user);
-            return View("Login");
+            return View("IndexLogged", user);
         }
 
         public string About()

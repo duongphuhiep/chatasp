@@ -1,4 +1,3 @@
-@model LoginRegisterViewModel
 @{ 
     ViewData["Title"] = "Home"; 
 } 
@@ -48,32 +47,9 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <form method="POST" asp-controller="Account" asp-action="Store">
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label">Email</label>
-                        <input asp-for="Email" type="text" class="form-control">
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label">Password</label>
-                        <input asp-for="Password" type="password" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FirstName" class="control-label">First name</label>
-                        <input asp-for="FirstName" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LastName" class="control-label">Last name</label>
-                        <input asp-for="LastName" type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="NickName" class="control-label">Nick name</label>
-                        <input asp-for="NickName" type="text" class="form-control">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
-                </form>
+                @{
+                    Html.RenderPartial("RegisterUser");
+                }
             </div>
         </div>
     </div>

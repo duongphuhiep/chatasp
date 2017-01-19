@@ -2,13 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Webapplication.Models.AccountViewModels
 {
-    public class LoginRegisterViewModel: LoginViewModel
+    public class RegisterUserViewModel: LoginViewModel
     {
-        [Required]
-        public string NickName { get; set; }
-        [Required]
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
     }
 }
