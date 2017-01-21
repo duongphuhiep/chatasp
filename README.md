@@ -28,7 +28,7 @@ or Watch and run so that the server is compiled
 dotnet watch run
 ```
 
-# How to Debug in VSCode
+# How to Debug in [VSCode]
 
 Attach Debugger to the process `dotnet exec ... webapp.dll` in the list.
 
@@ -38,3 +38,8 @@ You can also Run/Debug the WebApp directly from VSCode (F5)
 
 # Refernece
 * https://github.com/duongphuhiep/aspcore-boilerplate-01
+
+# News
+* Replace the [VSCode] **editor** by [Rider](https://www.jetbrains.com/rider) a **full-fleged IDE**.
+
+[VSCode]: https://code.visualstudio.com/

@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.0.0
+MinimumVisualStudioVersion = 10.0.0.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dal", "src\dal\dal.xproj", "{5B3D6CB2-DC89-473E-A813-0E3134114BDA}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dal.tests", "test\dal.tests\dal.tests.xproj", "{B6B529C4-8B9C-46B0-8A3F-6CCACEDE1BAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TEST", "TEST", "{4785A216-BCAE-4B61-8FAD-57834F9DC9AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_OTHER_", "_OTHER_", "{20CB0835-E0F7-4F73-A93D-A28C29D08BA3}"
+ProjectSection(SolutionItems) = preProject
+	README.md = README.md
+EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "webapp", "src\webapp\webapp.xproj", "{F69F3C73-577B-4575-9384-AD7581B0495C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B3D6CB2-DC89-473E-A813-0E3134114BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3D6CB2-DC89-473E-A813-0E3134114BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3D6CB2-DC89-473E-A813-0E3134114BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3D6CB2-DC89-473E-A813-0E3134114BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B529C4-8B9C-46B0-8A3F-6CCACEDE1BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B529C4-8B9C-46B0-8A3F-6CCACEDE1BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B529C4-8B9C-46B0-8A3F-6CCACEDE1BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B529C4-8B9C-46B0-8A3F-6CCACEDE1BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F69F3C73-577B-4575-9384-AD7581B0495C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F69F3C73-577B-4575-9384-AD7581B0495C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F69F3C73-577B-4575-9384-AD7581B0495C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F69F3C73-577B-4575-9384-AD7581B0495C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B6B529C4-8B9C-46B0-8A3F-6CCACEDE1BAD} = {4785A216-BCAE-4B61-8FAD-57834F9DC9AD}
+	EndGlobalSection
+EndGlobal
