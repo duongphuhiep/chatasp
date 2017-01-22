@@ -1,7 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Webapplication.Models.AccountViewModels;
@@ -10,7 +7,7 @@ namespace WebApplication.ViewComponents
 {
     public class Login : ViewComponent
     {
-        private readonly ILogger log;
+        private readonly ILogger<Login> log;
         public Login(ILogger<Login> logger)
         {
             log = logger;

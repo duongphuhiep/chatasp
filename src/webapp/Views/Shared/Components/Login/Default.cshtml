@@ -3,15 +3,15 @@
 @if (Model.IsSignedIn)
 {
     <div>
-        Hello, @Model.Email
+        Hello, @Model.NickName
         <form>
-            <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+            <button type="submit" class="btn btn-primary">Sign out</button>
         </form> 
     </div>
 }
 else 
 {
-    <form>
+    <form asp-controller="Account" asp-action="Login" Method="post">
         <div class="form-group">
             <label asp-for="Email" class="control-label">Email</label>
             <input asp-for="Email" type="text" class="form-control">

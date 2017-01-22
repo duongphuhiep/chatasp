@@ -1,9 +1,25 @@
+@{
+    ViewData["Title"] = "Login";
+}
+@section GlobalInlineCss {
+    <style>
+        section.panel {
+            background: #CFD8DC;
+            color:white;
+        }
+    </style>
+}
 
-<div class="container">
+<section class="container">
     <div class="row">
-        @await Component.InvokeAsync(nameof(Login))
-        <div>
-            <a href='#'>Forget the password</a>
+        <div class="panel col-md-6 col-md-offset-3">
+            @await Component.InvokeAsync(nameof(Login))
+            <div>
+                <a href='#'>Forget the password</a>
+            </div>
+            <div>
+                <a href="#">Register</a>
+            </div>
         </div>
     </div>
-</div>
+</section>

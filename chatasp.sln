@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_OTHER_", "_OTHER_", "{20CB0835-E0F7-4F73-A93D-A28C29D08BA3}"
 ProjectSection(SolutionItems) = preProject
 	README.md = README.md
+	.gitignore = .gitignore
 EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "webapp", "src\webapp\webapp.xproj", "{F69F3C73-577B-4575-9384-AD7581B0495C}"
