@@ -1,4 +1,5 @@
 using System;
+using Dal;
 using Dal.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,10 +37,12 @@ namespace WebApplication
             services.AddMvc();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(Global.LOGGED_USER_ONLY,
+                options.AddPolicy(Global.LOGGED_USER,
                     policy => policy.RequireClaim(nameof(User.Email))
                         .RequireClaim(nameof(User.NickName)));
             });
+            services.AddSingleton<IUserStore>(new UserStoreLocal());
+            services.addapi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +67,7 @@ namespace WebApplication
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                AuthenticationScheme = Global.BASIC_AUTH_COOKIE,
+                AuthenticationScheme = Global.AUTH_USER_COOKIE,
                 LoginPath = new PathString("/Account/Login/"),
                 AccessDeniedPath = new PathString("/Account/Forbidden/"),
                 AutomaticAuthenticate = true,
