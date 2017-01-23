@@ -4,6 +4,7 @@ using Dal.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,7 +36,11 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            //services.AddApiVersioning();
+            services.AddApiVersioning(o =>
+            {
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1, 0);
+            });
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(Global.LOGGED_USER,
@@ -80,6 +85,11 @@ namespace WebApplication
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapAreaRoute(
+                    name: "api",
+                    areaName: "Api",
+                    template: "api/v{version:apiVersion}/{controller}/{action}/{id?}"
+                );
             });
         }
     }

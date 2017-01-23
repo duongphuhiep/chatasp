@@ -39,6 +39,7 @@
             "version": "1.0.0-preview2-update1",
             "type": "build"
         },
+        "Microsoft.AspNetCore.Mvc.Versioning":"1.0.*",
         "dal": { "target": "project" }
     },
 
