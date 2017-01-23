@@ -1,34 +1,35 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using dal;
 using Microsoft.AspNetCore.Mvc;
 using Dal;
-using Dal.Model;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        public ViewResult Index(bool bye)
+        private readonly IUserStore _userStore;
+        public HomeController(IUserStore userStore)
         {
+            _userStore = userStore;
+        }
+
+        public async Task<ViewResult> Index(bool bye)
+        {
+            //display homepage for logged user
+            var principal = await HttpContext.Authentication.AuthenticateAsync(Global.AUTH_USER_COOKIE);
+            var email = principal?.FindFirst(nameof(Dal.Model.User.Email))?.Value;
+            if (email!=null) {
+                var user = await _userStore.FindUser(email);
+                if (user != null)
+                {
+                    return View("IndexLogged", user);
+                }
+            }
+            //display homepage for anonymous
             ViewData[Global.BYE] = bye;
             return View();
         }
 
-        [Authorize(Policy = nameof(Global.LOGGED_USER_ONLY))]
-        public async Task<ViewResult> IndexLogged()
-        {
-            var principal = await HttpContext.Authentication.AuthenticateAsync(Global.BASIC_AUTH_COOKIE);
-            var emailClaim = principal.FindFirst(nameof(Dal.Model.User.Email));
-            var email = emailClaim.Value;
-            var user = await UserStore.FindUser(email);
-            return View("IndexLogged", user);
-        }
-
+//        [Authorize(Policy = nameof(Global.LOGGED_USER))]
         public string About()
         {
             return "About";

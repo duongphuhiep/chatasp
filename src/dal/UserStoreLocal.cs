@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dal.Model;
 
-namespace dal
+namespace Dal
 {
-    public static class UserStore
+    public class UserStoreLocal: IUserStore
     {
-        private static readonly List<User> _allUsers = new List<User>
+        private readonly List<User> _allUsers = new List<User>
         {
             new User
             {
@@ -24,14 +24,19 @@ namespace dal
         /// <summary>
         /// return true if find matching user, password in the store
         /// </summary>
-        public static Task<User> Authenticate(string email, string hashPassword)
+        public Task<User> Authenticate(string email, string hashPassword)
         {
             return Task<User>.Run(()=> _allUsers.FirstOrDefault(u => u.Email == email));
         }
 
-        public static Task<User> FindUser(string email)
+        public Task<User> FindUser(string email)
         {
             return Task<User>.Run(()=> _allUsers.FirstOrDefault(u => u.Email == email));
+        }
+
+        public Task ReigsterUser(User u)
+        {
+            return Task.Run(()=> _allUsers.Add(u));
         }
     }
 }

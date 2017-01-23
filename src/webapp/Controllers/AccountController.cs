@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using dal;
+using Dal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Webapplication.Models.AccountViewModels;
@@ -11,15 +11,18 @@ namespace WebApplication.Controllers
     public class AccountController : Controller
     {
         private readonly ILogger log;
-        public AccountController(ILogger<AccountController> logger)
+        private readonly IUserStore _userStore;
+
+        public AccountController(ILogger<AccountController> logger, IUserStore userStore)
         {
             log = logger;
+            _userStore = userStore;
         }
 
         public async Task<IActionResult> Login(LoginStatusViewModel login)
         {
             log.LogInformation("SignIn", login);
-            var authUser = await UserStore.Authenticate(login.Email, login.Password);
+            var authUser = await _userStore.Authenticate(login.Email, login.Password);
             if (authUser==null)
             {
                 return View("Login");
@@ -37,9 +40,9 @@ namespace WebApplication.Controllers
 
             #endregion
 
-            await HttpContext.Authentication.SignInAsync(Global.BASIC_AUTH_COOKIE, principal);
+            await HttpContext.Authentication.SignInAsync(Global.AUTH_USER_COOKIE, principal);
 
-            return RedirectToAction("IndexLogged", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -48,13 +51,13 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> Logout()
         {
             log.LogInformation("SignOut");
-            await HttpContext.Authentication.SignOutAsync(Global.BASIC_AUTH_COOKIE);
+            await HttpContext.Authentication.SignOutAsync(Global.AUTH_USER_COOKIE);
             return RedirectToAction("Index", "Home", new {bye=true});
         }
 
         public IActionResult RegisterUser(RegisterUserViewModel user)
         {
-            return RedirectToAction("IndexLogged", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public string Fobidden()

@@ -5,8 +5,8 @@
     /// </summary>
     public static class Global
     {
-        public static readonly string BASIC_AUTH_COOKIE = nameof(BASIC_AUTH_COOKIE);
+        public static readonly string AUTH_USER_COOKIE = nameof(AUTH_USER_COOKIE);
         public static string BYE = nameof(BYE);
-        public static string LOGGED_USER_ONLY = nameof(LOGGED_USER_ONLY);
+        public static string LOGGED_USER = nameof(LOGGED_USER);
     }
 }
