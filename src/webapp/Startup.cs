@@ -32,10 +32,24 @@ namespace WebApplication
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Add directory browser capacity in Dev env
+        /// </summary>
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            configureServices(services, true);
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            configureServices(services, false);
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        private void configureServices(IServiceCollection services, bool isDev)
+        {
             services.AddMvc();
+
             services.AddApiVersioning(o =>
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
@@ -48,6 +62,10 @@ namespace WebApplication
                         .RequireClaim(nameof(User.NickName)));
             });
             services.AddSingleton<IUserStore>(new UserStoreLocal());
+
+            if (isDev)
+                services.AddDirectoryBrowser();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
