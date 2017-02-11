@@ -19,7 +19,7 @@ USAGE:
 
 ACTIONS:
     install     - Create the container '$CONTAINER_NAME' with shared data in '$LOCAL_DATA'.
-    uninstall   - Remove the couchbase container '$CONTAINER_NAME'.
+    uninstall   - Remove the couchbase container '$CONTAINER_NAME' and local data in '$LOCAL_DATA'.
     start       - Start the container '$CONTAINER_NAME'.
     stop        - Stop the container '$CONTAINER_NAME'.
     cbq         - Execute 'cbq' on the container '$CONTAINER_NAME'.
@@ -30,7 +30,7 @@ EOM
 if [ -x $1 ]; then
 	echo "\nERROR: Missing [ACTION] argument!"
 	{ usage; }
-	exit 
+	exit
 fi
 
 if [ $1 = 'install' ]; then
@@ -38,7 +38,7 @@ if [ $1 = 'install' ]; then
 	docker run --net=host --name $CONTAINER_NAME -d -v "$LOCAL_DATA":/opt/couchbase/var couchbase/server:community
     #docker run --net=host --name $CONTAINER_NAME -d -v "$LOCAL_DATA":/opt/couchbase/var -p 8091-8093:8091-8093 -p 11210:11210 couchbase/server
 elif [ $1 = 'uninstall' ]; then
-	if [ -d "$LOCAL_DATA" ]; then 
+	if [ -d "$LOCAL_DATA" ]; then
 		rm -rf "$LOCAL_DATA"
 	fi
 	if [ -n $CONTAINER_ID ]; then
