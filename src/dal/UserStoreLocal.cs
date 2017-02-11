@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dal.Model;
 
 namespace Dal
 {
-    public class UserStoreLocal: IUserStore
+    public class UserStoreLocal : IUserStore
     {
         private readonly List<User> _allUsers = new List<User>
         {
@@ -26,17 +27,24 @@ namespace Dal
         /// </summary>
         public Task<User> Authenticate(string email, string hashPassword)
         {
-            return Task<User>.Run(()=> _allUsers.FirstOrDefault(u => u.Email == email));
+            return Task<User>.Run(() => _allUsers.FirstOrDefault(u => u.Email == email));
         }
 
         public Task<User> FindUser(string email)
         {
-            return Task<User>.Run(()=> _allUsers.FirstOrDefault(u => u.Email == email));
+            return Task<User>.Run(() => _allUsers.FirstOrDefault(u => u.Email == email));
         }
 
-        public Task ReigsterUser(User u)
+        public Task ReigsterUser(User newUser)
         {
-            return Task.Run(()=> _allUsers.Add(u));
+            return Task.Run(() =>
+            {
+				if (_allUsers.Any(u => u.Email.Equals(newUser.Email, StringComparison.OrdinalIgnoreCase)
+					|| u.NickName.Equals(newUser.NickName, StringComparison.OrdinalIgnoreCase)))
+					throw new Exception("");
+                _allUsers.Add(newUser);
+
+            });
         }
     }
 }

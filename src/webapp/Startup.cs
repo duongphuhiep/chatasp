@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WebApp.Filters;
 
 namespace WebApplication
 {
@@ -61,6 +62,9 @@ namespace WebApplication
                     policy => policy.RequireClaim(nameof(User.Email))
                         .RequireClaim(nameof(User.NickName)));
             });
+
+			services.AddScoped<ValidateModelAttribute>();
+
             services.AddSingleton<IUserStore>(new UserStoreLocal());
 
             if (isDev)

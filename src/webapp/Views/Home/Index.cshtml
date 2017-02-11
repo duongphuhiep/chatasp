@@ -1,72 +1,11 @@
 @using WebApplication
 @{
-    ViewData["Title"] = "Home"; 
-} 
-@section GlobalInlineCss {
-    <style>
-        section { 
-            padding: 50px 0px; 
-        } 
-        section.signin {
-            background: #263238; 
-            color:white;
-        }
-    </style>
+    ViewData["Title"] = "Welcome";
 }
+
 @section Scripts
 {
-    <script src="/dist/bundle.js"></script>
+    <script src="/dist/home.js"></script>
 }
-<section class="signin">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1>CHATASP</h1>
-                <h2>A crowd free chatting forum</h2>
-            </div>
-            <div class="col-md-6">
-                @await Component.InvokeAsync(nameof(Login))
-            </div>
-        </div>
-    </div>
-</section>
-<section>
-    <p>Some cool react-stuff here</p>
-    <div id="root"></div>
-</section>
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                @if ((bool)ViewData[Global.BYE])
-                {
-                    <h1>Thanks for stopping by!</h1>
-                    <h2>We hope to see you again soon.</h2>
-                }
-                else
-                {
-                    <h1>Fantastic features!</h1>
-                    <ul>
-                        <li>
-                            <h2>Freedom</h2>
-                        </li>
-                        <li>
-                            <h2>Anonymous</h2>
-                        </li>
-                        <li>
-                            <h2>Security</h2>
-                        </li>
-                        <li>
-                            <h2>Crowding</h2>
-                        </li>
-                    </ul>
-                }
-            </div>
-            <div class="col-md-6">
-                @{
-                    Html.RenderPartial("RegisterUser");
-                }
-            </div>
-        </div>
-    </div>
-</section>
+
+<div id='app'></div>

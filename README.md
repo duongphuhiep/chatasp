@@ -3,7 +3,7 @@
 I will try to make application with
 * [ASP.NET MVC](https://docs.microsoft.com/en-us/aspnet/core/) 
 * [Couchbase](https://www.couchbase.com/nosql-databases/couchbase-server)
-* ReactJs, Mobx, WebSocket
+* [vuejs], WebSocket
 * I'm a "Windows" guy but all developement will go entirely under Linux.
 
 My objectif is to try, to train and to fail.. so
@@ -32,14 +32,21 @@ dotnet watch run
 
 Attach Debugger to the process `dotnet exec ... webapp.dll` in the list.
 
-> Tip: in the process list, filter the name of the application dll (`webapp.dll` in this case).
+> Tip: in the process list, filter the name of the application dll (`webapp.dll` or `chatasp` in this case).
 
 You can also Run/Debug the WebApp directly from VSCode (F5)
 
-# Refernece
+# Reference
 * https://github.com/duongphuhiep/aspcore-boilerplate-01
 
 # News
-* Replace the [VSCode] **editor** by [Rider](https://www.jetbrains.com/rider) a **full-fleged IDE**.
+* Replace the [VSCode] **editor** by [Rider] - a **full-fleged IDE**.
+* Choose [vuejs] to replace the combo [react] + [mobx]
+* Comeback from [Rider] to [VSCode] because [Rider] is not well-suite for frontend developement. [VSCode] can handle both ASP.net core + Front-end developement
 
+
+[mobx]: https://mobx.js.org/
+[react]: https://facebook.github.io/react/
+[vuejs]: https://vuejs.org/
 [VSCode]: https://code.visualstudio.com/
+[Rider]: https://www.jetbrains.com/rider

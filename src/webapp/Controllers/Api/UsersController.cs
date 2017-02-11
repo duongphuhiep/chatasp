@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Dal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebApp.Filters;
+using Webapplication.Models;
 using Webapplication.Models.AccountViewModels;
 
 namespace WebApplication.Controllers.Api
@@ -20,10 +22,14 @@ namespace WebApplication.Controllers.Api
             _userStore = userStore;
         }
 
+		[ServiceFilter(typeof(ValidateModelAttribute))]
         [HttpPost]
-        public IActionResult Add(RegisterUserViewModel user)
+        public IActionResult Register([FromBody] RegisterUserRequest newUser)
         {
-            return Json(user);
+			var resu = new RegisterUserResponse();
+			resu.NickName = newUser.NickName;
+			resu.Email = newUser.Email;
+            return Json(resu);
         }
     }
 }
