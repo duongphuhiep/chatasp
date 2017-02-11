@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# watch ASP.NET backend and webpack frontend at the same time
+
+SCRIPT=`readlink -f "$0"`
+PROJECT_DIR=`dirname "$SCRIPT"`
+WEBAPP_DIR="$PROJECT_DIR/src/webapp"
+WEBAPP_WWW="$WEBAPP_DIR/wwwroot"
+
+usage() {
+    cat <<EOM
+
+Helper to run watch
+
+USAGE:
+    $(basename $0) [ACTION]
+
+ACTIONS:
+    start       - Watch the WebApp Backend + Frontend.
+    stop        - Stop all watchers.
+    restart     - Restart the watching process.
+
+EOM
+    exit 0
+}
+
+start() {
+	cd $WEBAPP_WWW
+	webpack --watch&
+	cd $WEBAPP_DIR
+	dotnet run watch&
+}
+
+stop() {
+	# kill the `dotnet run watch`
+	# pkill send SIGTERM (15) by default, it is not enough to free the socket.
+	# so I sent the SIGKILL (9) here
+	pkill -9 -x dotnet
+
+	# kill the `webpack --watch`
+	pkill -f "webpack --watch"
+}
+
+if [ -x $1 ]; then
+	echo "\nERROR: Missing [ACTION] argument!"
+	usage
+	exit
+fi
+
+if [ $1 = 'start' ]; then
+	start
+elif [ $1 = 'stop' ]; then
+	stop
+elif [ $1 = 'restart' ]; then
+	stop
+	start
+else
+	echo "\nERROR: Unknow [ACTION] '$1'!"
+	usage
+fi
