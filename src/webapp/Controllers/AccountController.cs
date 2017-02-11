@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Dal;
+using Dal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Webapplication.Models.AccountViewModels;
@@ -28,22 +29,23 @@ namespace WebApplication.Controllers
                 return View("Login");
             }
 
-            #region build ClaimPrincipal
-
-            var id = new ClaimsIdentity();
-            id.AddClaims(new List<Claim>
-            {
-                new Claim(nameof(authUser.Email), authUser.Email),
-                new Claim(nameof(authUser.NickName), authUser.NickName)
-            });
-            var principal = new ClaimsPrincipal(id);
-
-            #endregion
-
+            var principal = createClaims(authUser.Email, authUser.NickName);
             await HttpContext.Authentication.SignInAsync(Global.AUTH_USER_COOKIE, principal);
 
             return RedirectToAction("Index", "Home");
         }
+
+		private ClaimsPrincipal createClaims(string email, string nickName)
+		{
+			var id = new ClaimsIdentity();
+            id.AddClaims(new List<Claim>
+            {
+                new Claim(nameof(Dal.Models.User.Email), email),
+                new Claim(nameof(Dal.Models.User.NickName), nickName)
+            });
+            return new ClaimsPrincipal(id);
+		}
+
 
         /// <summary>
         /// Redirect user to Home page which display "GoodBye" message on the homepage

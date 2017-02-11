@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dal.Model;
+using Dal.Models;
 
 namespace Dal
 {
@@ -9,6 +9,6 @@ namespace Dal
     {
         Task<User> Authenticate(string email, string hashPassword);
         Task<User> FindUser(string email);
-        Task ReigsterUser(User u);
+        Task AddUser(User u);
     }
 }

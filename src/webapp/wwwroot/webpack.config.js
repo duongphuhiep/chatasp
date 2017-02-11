@@ -3,7 +3,8 @@ var webpack = require('webpack')
 
 module.exports = {
     entry: {
-	    home:'./src/home.js'
+        'home': './src/home/main.js',
+        'home-logged': './src/home-logged/main.js'
     },
     output: {
         path: path.resolve(__dirname, './dist'),

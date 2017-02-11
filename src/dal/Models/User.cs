@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dal.Model
+namespace Dal.Models
 {
     /// <summary>
     /// And user can make or join any conversation
@@ -11,7 +11,7 @@ namespace Dal.Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string PasswordHash { get; set; }
+        public string HashedPassword { get; set; }
         public DateTime JointDate { get; set; }
     }
 }

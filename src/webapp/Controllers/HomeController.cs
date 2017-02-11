@@ -16,7 +16,7 @@ namespace WebApplication.Controllers
         {
             //display homepage for logged user
             var principal = await HttpContext.Authentication.AuthenticateAsync(Global.AUTH_USER_COOKIE);
-            var email = principal?.FindFirst(nameof(Dal.Model.User.Email))?.Value;
+            var email = principal?.FindFirst(nameof(Dal.Models.User.Email))?.Value;
             if (email!=null) {
                 var user = await _userStore.FindUser(email);
                 if (user != null)

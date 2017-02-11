@@ -1,6 +1,6 @@
 using System;
 
-namespace Dal.Model {
+namespace Dal.Models {
     public class Message
     {
         public Guid Id { get; private set; }
@@ -13,7 +13,7 @@ namespace Dal.Model {
         /// </summary>
         public DateTime PostAt { get; set; }
 
-        public static Message New() 
+        public static Message New()
         {
             return new Message {
                 Id = Guid.NewGuid(),

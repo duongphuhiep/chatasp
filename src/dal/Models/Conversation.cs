@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Dal.Model {
+namespace Dal.Models {
     public class Conversation
     {
         public Guid Id { get; private set; }

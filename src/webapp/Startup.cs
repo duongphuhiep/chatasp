@@ -1,6 +1,6 @@
 using System;
 using Dal;
-using Dal.Model;
+using Dal.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

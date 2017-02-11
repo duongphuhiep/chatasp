@@ -77,8 +77,8 @@
 			registerUser(e) {
 				axios.post('/api/v1.0/Users/Register', this.form)
 				.then(e => {
-					console.info(e);
-					Console.log('OK');
+					//the user is registered and logged, return to home page as a logged user
+					window.location='/';
 				})
 				.catch(error=>{
 					if (error.response && error.response.status==400)
@@ -92,7 +92,7 @@
 		data() {
 			return {
 				form: new FormData(),
-				valerr: {}
+				valerr: {} //validation errors
 			};
 		}
 	}

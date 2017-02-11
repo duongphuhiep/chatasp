@@ -3,7 +3,7 @@
 </template>
 
 <style lang="scss">
-	$turquoise: #795548;
+	$turquoise: #673AB7;
 	$grey-light:   hsl(0, 0%, 60%);
 	$grey-lighter: hsl(0, 0%, 70%);
 	@import '~bulma/bulma.sass';
@@ -13,7 +13,7 @@
 </style>
 
 <script>
-	import Home from './home/Home.vue';
+	import Home from './Home.vue';
 	export default {
 		name: 'app',
 		components: { Home }

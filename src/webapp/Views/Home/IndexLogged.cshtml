@@ -1,14 +1,17 @@
-@model Dal.Model.User
-@{ 
-    ViewData["Title"] = "Welcome"; 
-} 
+@model Dal.Models.User
+@{
+    ViewData["Title"] = "Welcome";
+}
 
-<div class="container">
-    <div class="row">
-        <h1>Hello, @Model.NickName</h1>
-        <h2>Enjoy the application!</h2>
-        <p>
-            <a asp-controller="Account" asp-action="Logout">Logout</a>
-        </p>
-    </div>
-</div>
+@section Scripts
+{
+    <script src="/dist/home-logged.js"></script>
+}
+
+<h1>Hello, @Model.NickName</h1>
+<h2>Enjoy the application!</h2>
+<p>
+		<a asp-controller="Account" asp-action="Logout">Logout</a>
+</p>
+
+<div id='app'></div>

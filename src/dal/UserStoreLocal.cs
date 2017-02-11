@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dal.Model;
+using Dal.Models;
 
 namespace Dal
 {
@@ -35,7 +35,7 @@ namespace Dal
             return Task<User>.Run(() => _allUsers.FirstOrDefault(u => u.Email == email));
         }
 
-        public Task ReigsterUser(User newUser)
+        public Task AddUser(User newUser)
         {
             return Task.Run(() =>
             {

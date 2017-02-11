@@ -6,7 +6,7 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Logging;
-using Dal.Model;
+using Dal.Models;
 
 namespace Dal.Tests
 {
@@ -21,17 +21,17 @@ namespace Dal.Tests
         //[Fact]
         public void StoreTest()
         {
-            using (Cluster cluster = new Cluster()) 
+            using (Cluster cluster = new Cluster())
             {
                 var msg = Message.New();
                 msg.Content = "Hello World";
 
-                try 
+                try
                 {
-                    using (var bucket = cluster.OpenBucket("chatasp")) 
+                    using (var bucket = cluster.OpenBucket("chatasp"))
                     {
                         var r = bucket.Insert<Message>(msg.Id.ToString(), msg);
-                        if (r.Success) 
+                        if (r.Success)
                         {
                             log.LogInformation("Insert Success!!!");
                         }
