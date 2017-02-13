@@ -24,7 +24,7 @@ namespace WebApplication.Controllers
         {
             log.LogInformation("SignIn", login);
             var authUser = await _userStore.Authenticate(login.Email, login.Password);
-            if (authUser==null)
+            if (authUser == null)
             {
                 return View("Login");
             }
@@ -35,16 +35,16 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-		private ClaimsPrincipal createClaims(string email, string nickName)
-		{
-			var id = new ClaimsIdentity();
+        private ClaimsPrincipal createClaims(string email, string nickName)
+        {
+            var id = new ClaimsIdentity();
             id.AddClaims(new List<Claim>
             {
                 new Claim(nameof(Dal.Models.User.Email), email),
                 new Claim(nameof(Dal.Models.User.NickName), nickName)
             });
             return new ClaimsPrincipal(id);
-		}
+        }
 
 
         /// <summary>
@@ -54,12 +54,7 @@ namespace WebApplication.Controllers
         {
             log.LogInformation("SignOut");
             await HttpContext.Authentication.SignOutAsync(Global.AUTH_USER_COOKIE);
-            return RedirectToAction("Index", "Home", new {bye=true});
-        }
-
-        public IActionResult RegisterUser(RegisterUserViewModel user)
-        {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { bye = true });
         }
 
         public string Fobidden()
