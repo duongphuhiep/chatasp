@@ -1,19 +1,24 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Dal;
+using Microsoft.Extensions.Logging;
 
 namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+		private readonly ILogger _log;
         private readonly IUserStore _userStore;
-        public HomeController(IUserStore userStore)
+        public HomeController(ILogger<HomeController> logger, IUserStore userStore)
         {
+			_log = logger;
             _userStore = userStore;
         }
 
         public async Task<ViewResult> Index(bool bye)
         {
+			_log.LogInformation("******************* GO HOME ********************");
+
             //display homepage for logged user
             var principal = await HttpContext.Authentication.AuthenticateAsync(Global.AUTH_USER_COOKIE);
             var email = principal?.FindFirst(nameof(Dal.Models.User.Email))?.Value;

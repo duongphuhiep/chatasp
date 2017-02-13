@@ -245,3 +245,5 @@ ModelManifest.xml
 .idea/**/modules.xml
 .idea/**/workspace.xml
 .idea/**/*.iml
+
+_logs/

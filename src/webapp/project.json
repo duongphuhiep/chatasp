@@ -39,7 +39,8 @@
             "version": "1.0.0-preview2-update1",
             "type": "build"
         },
-        "Microsoft.AspNetCore.Mvc.Versioning":"1.0.*",
+        "Microsoft.AspNetCore.Mvc.Versioning": "1.0.*",
+        "NLog.Web.AspNetCore": "4.3.*",
         "dal": { "target": "project" }
     },
 
@@ -103,10 +104,12 @@
 
     "publishOptions": {
         "include": [
-            "wwwroot",
             "**/*.cshtml",
             "appsettings.json",
-            "web.config"
+            "web.config",
+            "wwwroot/assets",
+            "wwwroot/dist",
+            "NLog.config"
         ]
     },
 
