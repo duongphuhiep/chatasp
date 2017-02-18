@@ -27,9 +27,9 @@
         "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
         "Microsoft.Extensions.Configuration.Json": "1.0.0",
         "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
-        "Microsoft.Extensions.Logging": "1.0.0",
-        "Microsoft.Extensions.Logging.Console": "1.0.0",
-        "Microsoft.Extensions.Logging.Debug": "1.0.0",
+        "Microsoft.Extensions.Logging": "1.1.0",
+        "Microsoft.Extensions.Logging.Console": "1.1.0",
+        "Microsoft.Extensions.Logging.Debug": "1.1.0",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
         "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
             "version": "1.0.0-preview2-update1",
@@ -41,6 +41,7 @@
         },
         "Microsoft.AspNetCore.Mvc.Versioning": "1.0.*",
         "NLog.Web.AspNetCore": "4.3.*",
+        "Autofac.Extensions.DependencyInjection": "4.0.0",
         "dal": { "target": "project" }
     },
 
@@ -119,6 +120,6 @@
     },
 
     "tooling": {
-        "defaultNamespace": "WebApplication",
+        "defaultNamespace": "WebApplication"
     }
 }

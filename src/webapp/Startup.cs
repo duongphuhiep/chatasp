@@ -1,4 +1,6 @@
 using System;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Dal;
 using Dal.Models;
 using Microsoft.AspNetCore.Builder;
@@ -38,22 +40,22 @@ namespace WebApplication
         /// <summary>
         /// Add directory browser capacity in Dev env
         /// </summary>
-        public void ConfigureDevelopmentServices(IServiceCollection services)
+        public IServiceProvider ConfigureDevelopmentServices(IServiceCollection services)
         {
-            configureServices(services, true);
+            return configureServices(services, true);
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            configureServices(services, false);
+            return configureServices(services, false);
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        private void configureServices(IServiceCollection services, bool isDev)
+        private IServiceProvider configureServices(IServiceCollection services, bool isDev)
         {
             services.AddMvc();
 
-			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddApiVersioning(o =>
             {
@@ -67,21 +69,32 @@ namespace WebApplication
                         .RequireClaim(nameof(User.NickName)));
             });
 
-			services.AddScoped<ValidateModelAttribute>();
+            services.AddScoped<ValidateModelAttribute>();
 
-            services.AddSingleton<IUserStore>(new UserStoreLocal());
+            //services.AddSingleton<IUserStore>(new UserStoreLocal());
 
             if (isDev)
                 services.AddDirectoryBrowser();
+
+            // Add Autofac
+
+            // If you want to dispose of the container at the end of the app, be sure to keep a reference to it as a property or field.
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<DefaultModule>();
+            containerBuilder.Populate(services);
+            this.ApplicationContainer = containerBuilder.Build();
+            return new AutofacServiceProvider(this.ApplicationContainer);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-			loggerFactory.AddNLog();
-    		app.AddNLogWeb();
+		private IContainer ApplicationContainer;
 
-			loggerFactory.AddDebug();
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
+        {
+            loggerFactory.AddNLog();
+            app.AddNLogWeb();
+
+            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
@@ -94,8 +107,6 @@ namespace WebApplication
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-
 
             app.UseStaticFiles();
 
@@ -121,6 +132,9 @@ namespace WebApplication
                     template: "api/v{version:apiVersion}/{controller}/{action}/{id?}"
                 );
             });
+
+            // If you want to dispose of resources that have been resolved in the application container, register for the "ApplicationStopped" event.
+            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
         }
     }
 }
