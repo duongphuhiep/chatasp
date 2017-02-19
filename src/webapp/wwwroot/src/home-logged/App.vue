@@ -3,9 +3,7 @@
 </template>
 
 <style lang="scss">
-	$turquoise: #673AB7;
-	$grey-light:   hsl(0, 0%, 60%);
-	$grey-lighter: hsl(0, 0%, 70%);
+	@import '../assets/global.scss';
 	@import '~bulma/bulma.sass';
 	* {
 		font-family: $family-primary;

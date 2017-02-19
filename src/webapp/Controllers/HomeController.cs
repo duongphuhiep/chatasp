@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Webapplication.Models;
 using Webapplication.Helpers;
 using WebApp.Filters;
+using Newtonsoft.Json.Linq;
 
 namespace WebApplication.Controllers
 {
@@ -49,13 +50,12 @@ namespace WebApplication.Controllers
 
 		[ServiceFilter(typeof(ValidateModelAttribute))]
 		[HttpPost]
-		public async Task<JsonResult> Login([FromBody] LoginRequest req)
+		public async Task<IActionResult> Login([FromBody] LoginRequest req)
 		{
 			var _authenticator = _authFactory(this.HttpContext, _userStore, _log);
 			var hashedPassword = StringUtils.HashSalted(req.Password);
 			var u = await _authenticator.Login(req.Login, hashedPassword);
-			var resu = new LoginResponse() { User = u };
-			return Json(resu);
+			return Json(new LoginResponse() { User = u });
 		}
 
 		/// <summary>
@@ -68,9 +68,7 @@ namespace WebApplication.Controllers
 		{
 			var email = this.User?.FindFirst(nameof(Dal.Models.User.Email))?.Value;
 			if (string.IsNullOrEmpty(email))
-			{
 				throw new InvalidOperationException("Email is not claimed"); //it shouldn't happen
-			}
 			var u = await _userStore.FindUser(email);
 			return Json(u);
 		}

@@ -41,9 +41,8 @@ namespace Dal
             {
 				if (_allUsers.Any(u => u.Email.Equals(newUser.Email, StringComparison.OrdinalIgnoreCase)
 					|| u.NickName.Equals(newUser.NickName, StringComparison.OrdinalIgnoreCase)))
-					throw new Exception("");
+					throw new Exception("Email or NickName already used");
                 _allUsers.Add(newUser);
-
             });
         }
     }
