@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Dal.Models
 {
@@ -13,5 +14,15 @@ namespace Dal.Models
         public string Email { get; set; }
         public string HashedPassword { get; set; }
         public DateTime JointDate { get; set; }
+		
+		/// <summary>
+		/// Participation Id
+		/// </summary>
+		public List<Guid> Conversations { get; set; }
+		
+		/// <summary>
+		/// Invitation Id
+		/// </summary>
+		public List<Guid> Invitations { get; set; }
     }
 }

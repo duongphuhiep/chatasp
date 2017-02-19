@@ -4,7 +4,7 @@ namespace Dal.Models {
     public class Message
     {
         public Guid Id { get; private set; }
-        public Guid ConversationId { get; set; }
+        public Guid Conversation { get; set; }
         public string Content { get; set; }
         public DateTime SentAt { get; set; }
 
