@@ -114,8 +114,8 @@ namespace WebApplication
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = Global.AUTH_USER_COOKIE,
-                LoginPath = new PathString("/Account/Login/"),
-                AccessDeniedPath = new PathString("/Account/Forbidden/"),
+                LoginPath = new PathString("/"),
+                AccessDeniedPath = new PathString("/Home/Forbidden/"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 ExpireTimeSpan = TimeSpan.FromMinutes(2)
