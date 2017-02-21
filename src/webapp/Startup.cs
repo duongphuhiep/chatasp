@@ -118,7 +118,7 @@ namespace WebApplication
                 AccessDeniedPath = new PathString("/Home/Forbidden/"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
-                ExpireTimeSpan = TimeSpan.FromMinutes(2)
+                ExpireTimeSpan = TimeSpan.FromDays(1)
             });
 
             app.UseMvc(routes =>

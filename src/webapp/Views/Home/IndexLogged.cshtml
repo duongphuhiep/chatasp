@@ -1,11 +1,15 @@
-@model Dal.Models.User
 @{
     ViewData["Title"] = "Welcome";
 }
+@section Css
+{
+	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
+	<link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
+}
 
 @section Scripts
-{
-    <script src="/dist/home-logged.js"></script>
+{	
+	<script src="/dist/home-logged.js"></script>
 }
 
 <div id='app'></div>
